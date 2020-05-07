@@ -18,11 +18,15 @@ fn main() {
 
 
     for i in start..(end + 1) {
-        match (i % 3, i % 5) {
-            (0, 0) => println!("FizzBuzz"),
-            (0, _) => println!("Fizz"),
-            (_, 0) => println!("Buzz"),
-            _ => println!("{}", i),
-        }
+        let s;
+        println!(
+            "{}",
+            match (i % 3, i % 5) {
+                (0, 0) => "FizzBuzz",
+                (0, _) => "Fizz",
+                (_, 0) => "Buzz",
+                _ => {s = i.to_string(); &s},
+            }
+        );
     }
 }
