@@ -24,15 +24,27 @@ fn main() {
 
     for i in start..(end + 1) {
         let s;
-        println!(
-            "{}",
-            match (i % prime_1, i % prime_2, primal::is_prime(i)) {
-                (0, 0, _) => "FizzBuzz",
-                (0, _, _) => "Fizz",
-                (_, 0, _) => "Buzz",
-                (_, _, true) => "Prime",
-                _ => {s = i.to_string(); &s},
-            }
-        );
+
+        if primal::is_prime(i) {
+            println!(
+                "{}",
+                match (i % prime_1, i % prime_2) {
+                    (0, 0) => "Fizz Buzz Prime",
+                    (0, _) => "Fizz Prime",
+                    (_, 0) => "Buzz Prime",
+                    _ => "Prime",
+                }
+            );
+        } else {
+            println!(
+                "{}",
+                match (i % prime_1, i % prime_2) {
+                    (0, 0) => "Fizz Buzz",
+                    (0, _) => "Fizz",
+                    (_, 0) => "Buzz",
+                    _ => {s = i.to_string(); &s},
+                }
+            );
+        }
     }
 }
