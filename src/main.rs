@@ -23,28 +23,22 @@ fn main() {
     let (prime_1, prime_2) = read_nums_pair();
 
     for i in start..(end + 1) {
-        let s;
-
-        if primal::is_prime(i) {
-            println!(
-                "{}",
-                match (i % prime_1, i % prime_2) {
-                    (0, 0) => "Fizz Buzz Prime",
-                    (0, _) => "Fizz Prime",
-                    (_, 0) => "Buzz Prime",
-                    _ => "Prime",
-                }
-            );
-        } else {
-            println!(
-                "{}",
+        let fizzbuzz: &str =
                 match (i % prime_1, i % prime_2) {
                     (0, 0) => "Fizz Buzz",
                     (0, _) => "Fizz",
                     (_, 0) => "Buzz",
-                    _ => {s = i.to_string(); &s},
-                }
-            );
+                    _ => "",
+                };
+
+        let is_prime: bool  = primal::is_prime(i);
+
+
+        match (fizzbuzz.len(), is_prime) {
+            (0, false) => println!("{}", i.to_string()),
+            (_, false) => println!("{}", fizzbuzz),
+            (0, true) => println!("Prime"),
+            _ => println!("{}", format!("{} Prime", fizzbuzz.to_string()))
         }
     }
 }
