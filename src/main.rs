@@ -1,3 +1,5 @@
+extern crate primal;
+
 use std::io;
 
 fn main() {
@@ -11,8 +13,8 @@ fn main() {
 
     let (start, end) = {
         let mut ws = s.split_whitespace();
-        let n: i32 = ws.next().unwrap().parse().unwrap();
-        let m: i32 = ws.next().unwrap().parse().unwrap();
+        let n: u64 = ws.next().unwrap().parse().unwrap();
+        let m: u64 = ws.next().unwrap().parse().unwrap();
         (n, m)
     };
 
@@ -21,10 +23,11 @@ fn main() {
         let s;
         println!(
             "{}",
-            match (i % 3, i % 5) {
-                (0, 0) => "FizzBuzz",
-                (0, _) => "Fizz",
-                (_, 0) => "Buzz",
+            match (i % 3, i % 5, primal::is_prime(i)) {
+                (0, 0, _) => "FizzBuzz",
+                (0, _, _) => "Fizz",
+                (_, 0, _) => "Buzz",
+                (_, _, true) => "Prime",
                 _ => {s = i.to_string(); &s},
             }
         );
